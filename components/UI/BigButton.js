@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { Text, StyleSheet, Dimensions, Pressable, Platform } from 'react-native';
 
 const screenHeight = Dimensions.get('window').height;
@@ -7,7 +8,7 @@ const screenWidth = Dimensions.get('window').width;
 const hideGuessButtonWidth = screenWidth * 0.75;
 const rankingButtonWidth = screenWidth * 0.75;
 
-export default function BigButton({ text, onPress, buttonStyle }) {
+export default function BigButton({ text, onPress, buttonStyle, passRef }) {
   return (
     <>
       <Pressable
@@ -19,8 +20,10 @@ export default function BigButton({ text, onPress, buttonStyle }) {
             Platform.OS === 'ios' && styles.iOSButton
           ]
         }
-        onPress={onPress}>
-        <Text style={styles.homeButtonText}>{text}</Text>
+        onPress={onPress ? onPress : () => { }}>
+
+        { (passRef !== null) ? <Link href={passRef} asChild><Text style={styles.homeButtonText}>{text}</Text></Link> : <Text style={styles.homeButtonText}>{text}</Text> }
+
       </Pressable>
     </>
   );
