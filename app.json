@@ -11,6 +11,8 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "main": "expo-router/entry",
+    "scheme": "convsrs",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -25,6 +27,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
