@@ -5,7 +5,7 @@ export default function AppLayout() {
   // providers
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <Slot />
     </>
   );
