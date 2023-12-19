@@ -16,10 +16,49 @@ export default function StackLayout() {
             // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
           }}
         />
-        <Stack.Screen name="flashcards/index"
+        <Stack.Screen name="decks"
+          options={{
+            // https://reactnavigation.org/docs/headers#setting-the-header-title
+            title: 'Decks',
+            // https://reactnavigation.org/docs/headers#adjusting-header-styles
+            headerStyle: { backgroundColor: '#000000' },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
+          }}
+        />
+        <Stack.Screen name="decks/[id]"
           options={{
             // https://reactnavigation.org/docs/headers#setting-the-header-title
             title: 'Flashcards',
+            // https://reactnavigation.org/docs/headers#adjusting-header-styles
+            headerStyle: { backgroundColor: '#000000' },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
+          }}
+        />
+        <Stack.Screen name="flashcards"
+          options={{
+            // https://reactnavigation.org/docs/headers#setting-the-header-title
+            title: 'Flashcard',
+            // https://reactnavigation.org/docs/headers#adjusting-header-styles
+            headerStyle: { backgroundColor: '#000000' },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
+          }}
+        />
+        <Stack.Screen name="flashcards/[id]"
+          options={{
+            // https://reactnavigation.org/docs/headers#setting-the-header-title
+            title: 'Flashcard',
             // https://reactnavigation.org/docs/headers#adjusting-header-styles
             headerStyle: { backgroundColor: '#000000' },
             headerTintColor: '#fff',
