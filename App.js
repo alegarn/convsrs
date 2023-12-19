@@ -13,11 +13,26 @@ import DecksScreen from "./screens/Decks";
 import FlashcardsScreen from "./screens/Flashcards";
 import FlashcardScreen from "./screens/Flashcards/flashcard";
 
+import { openDatabase } from "./utils/db";
+import { useLayoutEffect, useState } from "react";
+import LoadingOverlay from "./components/UI/LoadingOverlay";
+
+
 const Stack = createNativeStackNavigator();
 
 
 function AuthenticatedStack() {
-  //const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  const db = openDatabase({ username: "convsrs", id: 1 });
+  const [dbIsLoading, setDbIsLoading] = useState(true);
+
+
+  if (dbIsLoading) {
+    return (
+      <LoadingOverlay message="Opening database..." />
+    );
+  };
+
   return (
     <>
       <Stack.Navigator
@@ -117,12 +132,11 @@ function AuthenticatedStack() {
 };
 
 function Navigation() {
-  //const authContext = useContext(AuthContext);
-  /* {authContext.IsAuthenticated ? <AuthenticatedStack /> : <AuthStack />} */
+  const authContext = useContext(AuthContext);
 
   return (
     <NavigationContainer>
-      <AuthenticatedStack />
+      {authContext.IsAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
@@ -155,12 +169,12 @@ function Navigation() {
 }; */
 
 export default function App() {
-  /* <AuthContextProvider> */
-  /* </AuthContextProvider> */
   return (
     <>
       <StatusBar style="dark" />
+      <AuthContextProvider>
         <Navigation />
+      </AuthContextProvider>
     </>
   );
 };

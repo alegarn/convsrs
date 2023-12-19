@@ -2,6 +2,10 @@ import ListComponent from '../../components/UI/List';
 
 export default function DecksScreen({ navigation }) {
 
+  const createDeck = () => {
+    navigation.navigate("CreateDeckScreen");
+  };
+
   const decks = [
     { id: 1, deckId: 1, title: "Deck 1"},
     { id: 2, deckId: 2, title: "Deck 2"},
