@@ -2,18 +2,16 @@ import { createContext, useState } from "react";
 
 
 export const AuthContext = createContext({
-  token: '',
+/*   token: '',
   client: '',
   uid: '',
   access_token: '',
-  expiry: '',
+  expiry: '',*/
   userId: '',
-  scoreId: '',
-  IsAuthenticated: false,
+  IsAuthenticated: true, /* false */
   authenticate: () => {},
   logout: () => {},
   tokenAuthentication: () => {},
-  saveScoreId: () => {}
 });
 
 export default function AuthContextProvider({ children }) {
@@ -24,14 +22,14 @@ export default function AuthContextProvider({ children }) {
   const [expiry, setExpiry] = useState('');
   const [access_token, setAccess_token] = useState('');
  */
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('0');
 /*   const [scoreId, setScoreId] = useState('');
  */
 /*   function tokenAuthentication(token) {
     setAuthToken(token);
   }; */
 
-  async function authenticate({/* token, client, expiry, access_token, uid   */userId}) {
+  async function authenticate({/* token, client, expiry, access_token, uid   */userId = '0'}) {
     /* setAuthToken(token);
     await SecureStore.setItemAsync('token', token);
     await SecureStore.setItemAsync('client', client);
@@ -68,18 +66,17 @@ export default function AuthContextProvider({ children }) {
   };
 
   const value = {
-    token: authToken,
+    /* token: authToken,
     client: client,
     uid: uid,
     access_token: access_token,
     expiry: expiry,
+    */
     userId: userId,
-    scoreId: scoreId,
-    IsAuthenticated: !!authToken,
+    IsAuthenticated: isAuthenticated, //!!authToken,
     authenticate: authenticate,
     logout: logout,
-    tokenAuthentication: tokenAuthentication,
-    saveScoreId: saveScoreId
+    //tokenAuthentication: tokenAuthentication,
   };
   return (
     <AuthContext.Provider value={value}>

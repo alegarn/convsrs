@@ -13,18 +13,21 @@ import DecksScreen from "./screens/Decks";
 import FlashcardsScreen from "./screens/Flashcards";
 import FlashcardScreen from "./screens/Flashcards/flashcard";
 
-import { openDatabase } from "./utils/db";
-import { useLayoutEffect, useState } from "react";
+import { openOrCreateDatabase } from "./utils/db";
+import { useLayoutEffect, useState, useContext } from "react";
 import LoadingOverlay from "./components/UI/LoadingOverlay";
-
+import AuthContextProvider, { AuthContext } from "./store/auth-context";
 
 const Stack = createNativeStackNavigator();
 
-
 function AuthenticatedStack() {
-  const authContext = useContext(AuthContext);
-  const db = openDatabase({ username: "convsrs", id: 1 });
   const [dbIsLoading, setDbIsLoading] = useState(true);
+  const authContext = useContext(AuthContext);
+
+  useLayoutEffect(() => {
+    openOrCreateDatabase({ username: "convsrs", id: authContext.userId });
+    setDbIsLoading(false);
+  })
 
 
   if (dbIsLoading) {
