@@ -1,4 +1,6 @@
 import ListComponent from '../../components/UI/List';
+import IconButton from '../../components/UI/IconButton';
+
 
 export default function DecksScreen({ navigation }) {
 
@@ -16,9 +18,20 @@ export default function DecksScreen({ navigation }) {
     navigation.navigate("DeckScreen", params);
   };
 
+  const iconStyle = {
+    size: 24,
+    backgroundColor: "green",
+    borderRadius: 50,
+    padding: 10,
+    position: "absolute",
+    bottom: 10,
+    right: 10
+  }
+
   return (
     <>
       <ListComponent data={decks} onPress={onPress} />
+      <IconButton icon="add" color="black" size={24} onPress={createDeck} style={iconStyle} />
     </>
   );
 };
