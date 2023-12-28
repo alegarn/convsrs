@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { closeDb, openOrCreateDatabase } from "../utils/db";
 
 
 export const AuthContext = createContext({
@@ -8,10 +9,13 @@ export const AuthContext = createContext({
   access_token: '',
   expiry: '',*/
   userId: '',
+  username: '',
+  db: null,
   IsAuthenticated: true, /* false */
   authenticate: () => {},
   logout: () => {},
   tokenAuthentication: () => {},
+  addDbToContext: () => {},
 });
 
 export default function AuthContextProvider({ children }) {
@@ -23,13 +27,15 @@ export default function AuthContextProvider({ children }) {
   const [access_token, setAccess_token] = useState('');
  */
   const [userId, setUserId] = useState('0');
+  const [username, setUsername] = useState('');
+  const [db, setDb] = useState(null);
 /*   const [scoreId, setScoreId] = useState('');
  */
 /*   function tokenAuthentication(token) {
     setAuthToken(token);
   }; */
 
-  async function authenticate({/* token, client, expiry, access_token, uid   */userId = '0'}) {
+  async function authenticate({/* token, client, expiry, access_token, uid   */userId, username }) {
     /* setAuthToken(token);
     await SecureStore.setItemAsync('token', token);
     await SecureStore.setItemAsync('client', client);
@@ -42,13 +48,20 @@ export default function AuthContextProvider({ children }) {
     setIsAuthenticated(true);
     setExpiry(expiry);
     setAccess_token(access_token); */
+    setUsername(username);
     setUserId(userId);
     console.log("context", /* token, expiry, access_token, client, uid,  */userId);
   };
 
+  async function addDbToContext(db) {
+    setDb(db);
+  };
+
   async function logout() {
     setUserId('');
-
+    setUsername('');
+    closeDb(db);
+    setDb(null);
 
    /*  setIsAuthenticated(false);
     setAuthToken(null);
@@ -73,9 +86,12 @@ export default function AuthContextProvider({ children }) {
     expiry: expiry,
     */
     userId: userId,
+    username: username,
+    db: db,
     IsAuthenticated: isAuthenticated, //!!authToken,
     authenticate: authenticate,
     logout: logout,
+    addDbToContext: addDbToContext,
     //tokenAuthentication: tokenAuthentication,
   };
   return (
