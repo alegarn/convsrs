@@ -25,9 +25,11 @@ function AuthenticatedStack() {
   const authContext = useContext(AuthContext);
 
   useLayoutEffect(() => {
-    openOrCreateDatabase({ username: "convsrs", id: authContext.userId });
+    authContext.authenticate({userId: '0', username: 'convsrs'});
+    const db = openOrCreateDatabase({ username: authContext.username, id: authContext.userId });
+    authContext.addDbToContext(db);
     setDbIsLoading(false);
-  })
+  }, [authContext.username]);
 
 
   if (dbIsLoading) {
